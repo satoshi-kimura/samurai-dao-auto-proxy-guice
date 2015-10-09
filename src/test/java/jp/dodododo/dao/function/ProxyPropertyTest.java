@@ -1,5 +1,7 @@
 package jp.dodododo.dao.function;
 
+import static org.junit.Assert.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,31 +14,23 @@ import jp.dodododo.dao.impl.Dept;
 import jp.dodododo.dao.impl.RdbDao;
 import jp.dodododo.dao.lazyloading.AutoLazyLoadingProxy;
 import jp.dodododo.dao.log.SqlLogRegistry;
+import jp.dodododo.dao.unit.DbTestRule;
 
-import org.seasar.extension.unit.S2TestCase;
+import org.junit.Rule;
+import org.junit.Test;
 
-public class ProxyPropertyTest extends S2TestCase {
+public class ProxyPropertyTest {
+
+	@Rule
+	public DbTestRule dbTestRule = new DbTestRule();
 
 	private RdbDao dao;
 
 	private SqlLogRegistry logRegistry = new SqlLogRegistry();
 
-	@Override
-	public void setUp() throws Exception {
-		include("jdbc.dicon");
-	}
-
-	@Override
-	public void tearDown() throws Exception {
-	}
-
-	@Override
-	protected boolean needTransaction() {
-		return true;
-	}
-
+	@Test
 	public void testInsertAndSelect() {
-		dao = new RdbDao(getDataSource());
+		dao = new RdbDao(dbTestRule.getDataSource());
 		DeptProxy.dao = dao;
 
 		dao.setSqlLogRegistry(logRegistry);
@@ -56,7 +50,7 @@ public class ProxyPropertyTest extends S2TestCase {
 		List<Emp> select = dao.select("select * from emp, dept where emp.deptno = dept.deptno and empno = " + empNo, Emp.class);
 		System.out.println(select);
 		assertEquals(empNo, select.get(0).EMPNO);
-		assertEquals("2", select.get(0).COMM);
+		assertEquals("2.00", select.get(0).COMM);
 		assertEquals("ename", select.get(0).NAME);
 		assertNotNull(select.get(0).TSTAMP);
 

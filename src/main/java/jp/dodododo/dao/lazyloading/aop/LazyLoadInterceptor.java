@@ -90,10 +90,4 @@ public class LazyLoadInterceptor<T> implements MethodInterceptor {
 		}
 		return false;
 	}
-
-//	public Object intercept(Object targetObject, Method method, Object[] arguments, MethodProxy methodProxy) throws Throwable {
-//		MethodInvocationImpl invocation = new MethodInvocationImpl(targetObject, method, arguments, methodProxy);
-//
-//		return invoke(invocation);
-//	}
 }
