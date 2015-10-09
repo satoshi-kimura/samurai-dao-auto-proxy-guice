@@ -32,8 +32,13 @@ public class ProxyObjectInitializer {
 					field.set(target, field2.get(t));
 				}
 			}
-		} catch (IllegalArgumentException | IllegalAccessException
-				| NoSuchFieldException | SecurityException e) {
+		} catch (IllegalArgumentException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (NoSuchFieldException e) {
+			throw new RuntimeException(e);
+		} catch (SecurityException e) {
 			throw new RuntimeException(e);
 		}
 	}

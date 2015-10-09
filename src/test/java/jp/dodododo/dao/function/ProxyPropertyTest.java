@@ -109,19 +109,16 @@ public class ProxyPropertyTest extends S2TestCase {
 			this.DEPTNO = DEPTNO;
 		}
 
-		@Override
 		public Dept lazyLoad() {
 			System.out.println("load");
-			return DeptProxy.dao.selectOne("select * from dept where deptno =" + DEPTNO, Dept.class).get();
+			return DeptProxy.dao.selectOne("select * from dept where deptno =" + DEPTNO, Dept.class);
 		}
 
-		@Override
 		public Dept real() {
 			System.out.println("real");
 			return real;
 		}
 
-		@Override
 		public void setReal(Dept real) {
 			System.out.println("setreal");
 			this.real = real;

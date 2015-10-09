@@ -116,17 +116,14 @@ public class ProxyTest extends S2TestCase {
 			this.DEPTNO = DEPTNO;
 		}
 
-		@Override
 		public Dept lazyLoad() {
-			return DeptProxy.dao.selectOne("select * from dept where deptno =" + DEPTNO, Dept.class).get();
+			return DeptProxy.dao.selectOne("select * from dept where deptno =" + DEPTNO, Dept.class);
 		}
 
-		@Override
 		public Dept real() {
 			return real;
 		}
 
-		@Override
 		public void setReal(Dept real) {
 			this.real = real;
 		}

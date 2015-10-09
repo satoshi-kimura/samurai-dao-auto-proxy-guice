@@ -78,19 +78,16 @@ public class AutoProxyFactoryTest {
 			this.i = i;
 		}
 
-		@Override
 		public TestTarget lazyLoad() {
 			System.out.println("lazyLoad");
 			return new TestTarget();
 		}
 
-		@Override
 		public TestTarget real() {
 			System.out.println("real");
 			return real;
 		}
 
-		@Override
 		public void setReal(TestTarget real) {
 			System.out.println("setReal");
 			this.real = real;
